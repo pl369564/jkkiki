@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<mavlink>
+  <version>3</version>
+  <enums>
+
+  </enums>
+  
+  <messages>
+    <message id="213" name="FILE_RESPONSE_INFO">
+      <description>the mavlink is file reponse info</description>
+      <field type="uint32_t" name="token">token</field>
+      <field type="uint8_t" name="target_info">target_info</field>
+      <field type="uint32_t" name="plane_id">plane_id</field>
+    </message>
+    
+    <message id="214" name="WIFI_SETS">
+        <description> the mavlink is wifi settings</description>
+        <field type="uint32_t" name="token">token</field>
+        <field type="uint16_t" name="plane_id">plane_id</field>
+        <field type="uint8_t" name="type">type</field>
+        <field type="uint8_t" name="ack">ack</field>
+        <field type="uint8_t[20]" name="ssid">ssid</field>
+        <field type="uint8_t[20]" name="psk">psk</field>
+    </message>
+
+    <message id="215" name="COLOR_TRACK_TARGET">
+      <description>color track target</description>
+      <field type="uint8_t" name="fun_id">fun_id</field>
+      <field type="uint32_t" name="data_w">data_w</field>
+      <field type="uint32_t" name="data_h">data_h</field>
+      <field type="uint8_t[147]" name="data">data[7*7*3]</field>
+      <field type="uint32_t" name="rect_x">rect_x</field>
+      <field type="uint32_t" name="rect_y">rect_y</field>
+      <field type="uint32_t" name="rect_w">rect_w</field>
+      <field type="uint32_t" name="rect_h">rect_h</field>
+    </message>
+
+    <message id="216" name="COLOR_TRACK_TARGET_RET">
+      <description>color track target ret</description>
+      <field type="uint64_t" name="frame_id">frame_id</field>
+      <field type="uint32_t" name="rect_x">rect_x</field>
+      <field type="uint32_t" name="rect_y">rect_y</field>
+      <field type="uint32_t" name="rect_w">rect_w</field>
+      <field type="uint32_t" name="rect_h">rect_h</field>
+    </message>
+
+    <message id="219" name="LINE_WALKING">
+      <description>line walking</description>
+      <field type="uint32_t" name="fun_id">fun_id</field>
+      <field type="uint32_t" name="dist">dist</field>
+      <field type="uint32_t" name="tv">tv</field>
+      <field type="uint32_t" name="way_color">way_color</field>
+      <field type="uint8_t" name="result">result</field>
+    </message>
+    
+    <message id="227" name="FILE_HEADS">
+        <description> the mavlink is file heads </description>
+        <field type="uint32_t" name="token">token</field>
+        <field type="uint8_t" name="file_type">file_type</field>
+        <field type="uint32_t" name="file_size">file_size</field>
+        <field type="uint16_t" name="plane_id">plane_id</field>
+        <field type="float[4]"  name="info">info</field>
+        <field type="float[6]"  name="array">array</field>
+        <field type="uint8_t[3]" name="version">version</field>
+        <field type="uint8_t[16]" name="md5">md5</field>
+        <field type="char[50]" name="file_name">file_name</field>
+    </message>
+    
+    <message id="228" name="PLANE_ACK">
+        <description> the mavlink is plane ack command </description>
+        <field type="uint8_t" name="token">token</field>
+        <field type="uint16_t" name="plane_id">plane_id</field>
+        <field type="uint8_t" name="cmd">cmd</field>
+        <field type="uint8_t" name="result">result</field>
+        <field type="uint8_t" name="type">type</field>
+    </message>
+    
+    <message id="229" name="PLANE_COMMAND">
+        <description>the mavlink is plane command </description>
+        <field type="uint64_t" name="utc">utc</field>
+        <field type="uint32_t" name="token">token</field>
+        <field type="uint16_t" name="data">data</field>
+        <field type="uint16_t" name="plane_id">plane_id</field>
+        <field type="uint8_t" name="cmd">cmd</field>
+        <field type="uint8_t" name="ack">ack</field>
+        <field type="uint8_t" name="type">type</field>
+        <field type="uint8_t" name="reserve">reserve</field>
+    </message>
+    <message id="230" name="PLANE_ACK_EXTEND">
+        <description> the mavlink is plane ack command  extend </description>
+        <field type="uint32_t" name="token">token</field>
+        <field type="uint16_t" name="plane_id">plane_id</field>
+        <field type="uint8_t"  name="cmd">cmd</field>
+        <field type="uint8_t"  name="result">result</field>
+        <field type="uint8_t"  name="type">type</field>
+        <field type="char[64]" name="extend">extend</field>
+    </message>
+  
+    <message id="231" name="PLANE_STATUS">
+      <description> the mavlink is plane status </description>
+      <field type="int64_t" name="capacity">capacity</field>
+      <field type="int64_t" name="remaining">remaining</field>
+      <field type="int64_t" name="occupied">occupied</field>
+      <field type="uint16_t" name="plane_id">plane_id</field>
+      <field type="uint8_t" name="rtp">rtp</field>
+      <field type="uint8_t" name="dsp">dsp</field>
+      <field type="uint8_t" name="qr">qr</field>
+      <field type="uint8_t" name="video">video</field>
+      <field type="uint8_t" name="laser">laser</field>
+      <field type="int8_t" name="pitch">laser</field>
+      <field type="uint8_t" name="line">line</field>
+      <field type="uint8_t" name="wifi">wifi</field>
+      <field type="char[64]" name="extend">extend</field>
+    </message>
+
+    <message id="232" name="Broadcast_PLANE_STATUS">
+      <description> broadcast mavlink plane status </description>
+      <field type="char[16]" name="sn">sn</field>
+      <field type="char[16]" name="ip">ip</field>
+      <field type="uint8_t" name="plane_id">plane_id</field>
+      <field type="uint8_t" name="wifi_mode">wifi_mode</field>
+      <field type="uint8_t" name="bind_client">bind_client</field>
+    </message>
+
+    <message id="234" name="QRRecognite_Deal">
+      <description> qr recognite deal </description>
+      <field type="double" name="time_duration">time_duration</field>
+      <field type="float" name="search_radius">search_radius</field>
+      <field type="float" name="qr_size">qr_size</field>
+      <field type="int32_t" name="run_rate">run_rate</field>
+      <field type="int32_t" name="qr_id">qr_id</field>
+      <field type="float" name="x_com">x_com</field>
+      <field type="float" name="y_com">y_com</field>
+      <field type="float" name="z_com">z_com</field>
+      <field type="float" name="yaw_com">yaw_com</field>
+      <field type="uint8_t" name="mode">mode</field>
+      <field type="int8_t" name="qr_background_grayscale">qr_background_grayscale</field>
+      <field type="int8_t" name="status">status</field>
+    </message>
+
+    <message id="235" name="ColorRecog">
+      <description> qr recognite deal </description>
+      <field type="uint8_t" name="mode">mode</field>
+      <field type="uint8_t" name="state">state</field>
+      <field type="uint8_t" name="r">r</field>
+      <field type="uint8_t" name="g">g</field>
+      <field type="uint8_t" name="b">b</field>
+    </message>
+
+    <message id="236" name="CAMERA">
+      <description> recognite mark </description>
+      <field type="uint8_t" name="mode">mode</field>
+      <field type="uint8_t" name="type">type</field>
+      <field type="uint8_t" name="result">result</field>
+      <field type="float" name="x">x</field>
+      <field type="float" name="y">y</field>
+      <field type="float" name="z">z</field>
+      <field type="float" name="angle">angle</field>
+      <field type="uint16_t" name="time_duration">time_duration</field>
+    </message>
+    
+  </messages>
+</mavlink>
+
+
+
+
+

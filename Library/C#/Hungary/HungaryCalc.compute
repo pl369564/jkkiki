@@ -1,0 +1,131 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel Cmain
+#define GROUP_SIZE 1024
+#include "UnityCG.cginc"
+
+//StructuredBuffer<int> size;//0 = row,1 = col
+int2 size;
+int step;
+int3 pathinfo;
+
+RWStructuredBuffer<float> mat;
+RWStructuredBuffer<uint> sortTable;
+
+//RWStructuredBuffer<int> pathinfo;
+RWStructuredBuffer<int> path;
+RWStructuredBuffer<int> rowCover;
+RWStructuredBuffer<int> colCover;
+
+RWStructuredBuffer<int> mark;
+RWStructuredBuffer<int> result;
+
+//RWStructuredBuffer<int> step;
+
+void Step1(uint3 id)
+ {
+    uint row = id.x;
+    uint start = row * size[1];
+    float min = mat[start];
+    for (uint i = 0; i < size[1]; i++)
+    {
+        uint index = start + i;
+        float value = mat[index];
+        if (value < min)
+            min = value;
+    }
+    for (uint i = 0; i < size[1]; i++)
+    {
+        uint index = start + i;
+        mat[index] -= min;
+        if (mat[index] == 0&&colCover[i] == 0))
+        {
+            mark[index] =1;
+            rowCover[row] = 1;
+            colCover[i] = 1;
+        }
+    }
+    ReSortTable(row);
+}
+
+void Step2(uint3 id) {
+    
+    uint r = id.x;
+    for (int c = 0; c < size[1]; c++)
+    {
+        if (mat[r, c] == 0 && colCover[c] == 0  )
+        {
+            mark[r, c] = 1;
+            colCover[c] = 1;
+            continue;
+        }
+    }
+}
+void Step3(uint3 id) {
+    uint c = id.x;
+    for (int r = 0; c < size[0]; r++)
+    {
+        if (mark[r, c] == 1)
+        {
+            colCover[c] = 1;
+            continue;
+        }
+    }
+}
+void Step4(uint3 id) {
+
+}
+void Step5(uint3 id) {
+
+}
+void Step6(uint3 id) {
+
+}
+void Step7(uint3 id) {
+
+}
+
+void ReSortTable(uint r)
+{
+    uint left = 0;
+    uint right = size[1];
+    QuickSortTable(r,left, right);
+}
+
+void QuickSortTable(uint row,uint left,uint right)
+{
+    if(left < right){
+        uint partition = Partition(row,left,right);
+        QuickSortTable(row,left,partition-1);
+        QuickSortTable(row,partition+1,right);
+    }
+}
+
+int Partition(uint row,uint left,uint right){
+    uint start = row * size[1];
+    uint index = left+1;
+    for(uint i = index,; i <= right; i++){
+        if(mat[sortTable[start + i]] < mat[sortTable[start + left]]){
+            uint tmp = sortTable[i];
+            sortTable[i] = sortTable[index];
+            sortTable[index] = tmp;
+            index++;
+        }
+    }
+    
+    return index-1;
+}
+
+[numthreads(GROUP_SIZE, 1, 1)]
+void Cmain(uint3 id : SV_DispatchThreadID)
+{
+	switch (step)
+    {
+        case 1: Step1(id); break;
+        case 2: Step2(id); break;
+        case 3: Step3(id); break;
+        case 4: Step4(id); break;
+        case 5: Step5(id); break;
+        case 6: Step6(id); break;
+        case 7: Step7(id); break;
+    }
+}

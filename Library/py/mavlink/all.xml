@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<mavlink>
+  <include>f09.xml</include>
+  <include>mavlink.xml</include>
+</mavlink>
